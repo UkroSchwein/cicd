@@ -26,6 +26,7 @@ pipeline {
 
         stage('Deploy to Staging') {
             steps {
+                echo "Current branch: ${env.GIT_BRANCH}"
                 echo 'Deploying to staging server...'
                 sh 'chmod +x ./deploy.sh'
                 sh './deploy.sh staging'
