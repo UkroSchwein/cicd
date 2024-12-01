@@ -1,19 +1,31 @@
 pipeline {
     agent any
+
     stages {
-        stage("Build") {
+        stage('Checkout') {
             steps {
-                echo "Сборка приложения..."
+                checkout scm
             }
         }
-        stage("Test") {
+
+        stage('Build') {
             steps {
-                echo "Тестирование приложения..."
+                echo 'Building the project...'
+                sh './build.sh'
             }
         }
-        stage("Deploy") {
+
+        stage('Test') {
             steps {
-                echo "Развёртывание приложения..."
+                echo 'Running tests...'
+                sh './run_tests.sh'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application...'
+                sh './deploy.sh'
             }
         }
     }
