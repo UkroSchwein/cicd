@@ -11,9 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the project...'
-                // Делаем скрипт build.sh исполнимым
                 sh 'chmod +x ./build.sh'
-                // Запускаем build.sh
                 sh './build.sh'
             }
         }
@@ -21,9 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Делаем скрипт run_tests.sh исполнимым
                 sh 'chmod +x ./run_tests.sh'
-                // Запускаем run_tests.sh
                 sh './run_tests.sh'
             }
         }
@@ -31,9 +27,7 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying to staging server...'
-                // Делаем скрипт deploy.sh исполнимым
                 sh 'chmod +x ./deploy.sh'
-                // Запускаем deploy.sh для staging
                 sh './deploy.sh staging'
             }
         }
@@ -45,9 +39,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying to production server...'
-                // Делаем скрипт deploy.sh исполнимым
                 sh 'chmod +x ./deploy.sh'
-                // Запускаем deploy.sh для production
                 sh './deploy.sh production'
             }
         }
