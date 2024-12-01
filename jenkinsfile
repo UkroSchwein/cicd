@@ -2,22 +2,19 @@ pipeline {
     agent any
 
     stages {
-        // Этап клонирования репозитория
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        // Этап сборки проекта
         stage('Build') {
             steps {
                 echo 'Building the project...'
-                sh './build.sh'  // или полный путь, если нужно: './scripts/build.sh'
+                sh './build.sh'
             }
         }
 
-        // Этап тестирования проекта
         stage('Test') {
             steps {
                 echo 'Running tests...'
@@ -25,33 +22,11 @@ pipeline {
             }
         }
 
-        // Этап деплоя на staging
-        stage('Deploy to Staging') {
+        stage('Deploy') {
             steps {
-                echo 'Deploying to staging server...'
-                sh './deploy.sh staging'  // предполагаем, что скрипт деплоя обрабатывает переменную 'staging'
+                echo 'Deploying the application...'
+                sh './deploy.sh'
             }
-        }
-
-        // Этап деплоя на production (будет выполняться только после успешного деплоя на staging)
-        stage('Deploy to Production') {
-            when {
-                branch 'main'  // Убедимся, что деплой на production выполняется только с главной ветки
-                beforeAgent true
-            }
-            steps {
-                echo 'Deploying to production server...'
-                sh './deploy.sh production'  // предполагаем, что скрипт деплоя обрабатывает переменную 'production'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
