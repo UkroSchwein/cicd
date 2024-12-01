@@ -34,7 +34,7 @@ pipeline {
 
         stage('Deploy to Production') {
             when {
-                branch 'main'  // Выполняется только на главной ветке
+                branch '/main'  // Выполняется только на главной ветке
                 beforeAgent true
             }
             steps {
