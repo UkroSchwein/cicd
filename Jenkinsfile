@@ -33,10 +33,6 @@ pipeline {
         }
 
         stage('Deploy to Production') {
-            when {
-                branch '*/main'  // Выполняется только на главной ветке
-                beforeAgent true
-            }
             steps {
                 echo 'Deploying to production server...'
                 sh 'chmod +x ./deploy.sh'
