@@ -26,7 +26,6 @@ pipeline {
 
         stage('Deploy to Staging') {
             steps {
-                echo "Current branch: ${env.GIT_BRANCH}"
                 echo 'Deploying to staging server...'
                 sh 'chmod +x ./deploy.sh'
                 sh './deploy.sh staging'
@@ -35,7 +34,7 @@ pipeline {
 
         stage('Deploy to Production') {
             when {
-                branch '/main'  // Выполняется только на главной ветке
+                branch 'origin/main'  // Выполняется только на главной ветке
                 beforeAgent true
             }
             steps {
